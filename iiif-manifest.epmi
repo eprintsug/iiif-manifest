@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<epm xmlns='http://eprints.org/ep2/data/2.0' id='http://winch.localhost/id/epm/iiif-manifest'>
+  <epmid>iiif-manifest</epmid>
+  <uri>http://winch.localhost/id/epm/iiif-manifest</uri>
+  <documents>
+    <document>
+      <files>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>epm/iiif-manifest/cfg/cfg.d/iiif-manifest.pl</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>57de5181cabfff33d345f1779cb9797f</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>60</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>plugins/EPrints/Plugin/Export/IIIFManifest.pm</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>2cdfbb557cd203d846fe1b7bf626b5cb</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>2280</filesize>
+        </file>
+      </files>
+      <mime_type>text/plain</mime_type>
+      <format>text</format>
+      <main>plugins/EPrints/Plugin/Export/IIIFManifest.pm</main>
+      <content>install</content>
+    </document>
+  </documents>
+  <version>1.0.0</version>
+  <creators>
+    <item>
+      <name>
+        <family>Name</family>
+        <given>Your</given>
+      </name>
+      <id>you@email.address</id>
+    </item>
+  </creators>
+  <datestamp>2015-06-25 22:34:32</datestamp>
+  <title>IIIF Manifest</title>
+  <description>This is the description.</description>
+  <requirements>The following modules are required: X, Y, Z</requirements>
+  <home_page>http://github.com/your/project</home_page>
+</epm>
