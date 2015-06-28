@@ -62,8 +62,8 @@ sub output_dataobj
 		# TODO don't think this is the right/best way to find parts?
 		my $parts = $repo->dataset( 'eprint' )->search(
 			filters => [
-				{ meta_fields => [qw( relation_type )], value => 'http://purl.org/dc/terms/isPart' },
-				{ meta_fields => [qw( relation_uri )], value => $eprint->internal_uri },
+				{ meta_fields => [qw( relation_type )], value => 'http://purl.org/dc/terms/isPart', merge => 'EX' },
+				{ meta_fields => [qw( relation_uri )], value => $eprint->internal_uri, merge => 'EX' },
 			],
 			satisfy_all => 1,
 			custom_order => 'placement',
