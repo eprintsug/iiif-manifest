@@ -57,18 +57,20 @@ print STDERR "output dataobj\n";
 	my @docs;
 	if( $eprint->value( 'type' ) eq 'collection' )
 	{
+		$data->{sequences}->[0]->{viewingHint} = 'paged';
+
 		# gather parts
+		# TODO don't think this is the right/best way to find parts?
 		my $parts = $repo->dataset( 'eprint' )->search(
-			{
-				filters => [
-					{ metadata_fields => [qw( relation_type )], 'http://purl.org/dc/terms/isPart', 'EX' },
-					{ metadata_fields => [qw( relation_uri )], $eprint->internal_uri, 'EX' },
-				],
-				satisfy_all => 1,
-				custom_order => 'placement',
-			}
+			filters => [
+				{ meta_fields => [qw( relation_type )], value => 'http://purl.org/dc/terms/isPart' },
+				{ meta_fields => [qw( relation_uri )], value => $eprint->internal_uri },
+			],
+			satisfy_all => 1,
+			custom_order => 'placement',
 		);
-		$parts->map( $repo, sub {
+
+		$parts->map( sub {
 			my( undef, undef, $eprint, $docs ) = @_;
 
 			push @$docs, $eprint->get_all_documents;
@@ -89,14 +91,14 @@ print STDERR "output dataobj\n";
 		push @canvases, {
 			'@id' => $canvas,
 			'@type' => 'sc:Canvas',
-			thumbnail => sprintf( '%s%s', $repo->config( 'http_url' ), $doc->thumbnail_url( 'small' ) ),
+			label => sprintf( '%d', $i + 1 ),
 			images => [
 				{
 					'@id' => sprintf( '%s/imageanno/%s', $id, $path ),
-					'@type' => 'oa =>Annotation',
+					'@type' => 'oa:Annotation',
 					resource => {
 						'@id' => sprintf( '%s/res/%s', $id, $path ),
-						'@type' => 'dcTypes =>Image',
+						'@type' => 'dcTypes:Image',
 						service => {
 							'@context' => 'http://iiif.io/api/image/2/context.json',
 							'@id' => sprintf( '%s/%s', $IIIF_SERVER_URL, $path ),
