@@ -25,7 +25,6 @@ sub new
 sub output_dataobj
 {
 	my( $plugin, $eprint ) = @_;
-print STDERR "output dataobj\n";
 
 	my $repo = $plugin->repository;
 	my $id = $eprint->uri;
