@@ -72,7 +72,8 @@ sub output_dataobj
 		$parts->map( sub {
 			my( undef, undef, $eprint, $docs ) = @_;
 
-			push @$docs, $eprint->get_all_documents;
+			# push the part uri into the doc object so we don't have to re-retrieve the part later
+			push @$docs, map { $_->{_eprint_uri} = $eprint->uri } $eprint->get_all_documents;
 		}, \@docs );
 	}
 	else
@@ -87,6 +88,8 @@ sub output_dataobj
 		my $path = sprintf( '%s/%s', $IIIF_BASE_PATH, $doc->exists_and_set( $IIIF_PATH_FIELD ) ? $doc->value( $IIIF_PATH_FIELD ) : $doc->value( 'main' ) );
 		my $canvas = sprintf( '%s/canvas/%s/%d', $id, $path, $i );
 
+		# if the doc came from a part, use the part uri instead of the collection uri
+		my $id = defined $doc->{_eprint_uri} ? $doc->{_eprint_uri} : $id;
 		push @canvases, {
 			'@id' => $canvas,
 			'@type' => 'sc:Canvas',
